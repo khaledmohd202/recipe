@@ -1,0 +1,8 @@
+flutter_launcher_icons:
+  android: true
+  ios: true
+  image_path: "assets/images/recipe_1024.png"
+  
+  adaptive_icon_background: "#FF7043"
+  
+  adaptive_icon_foreground: "assets/images/recipe_512.PNG"
