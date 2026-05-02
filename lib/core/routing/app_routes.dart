@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:recipe/core/routing/routing_animation.dart';
-import 'package:recipe/features/auth/presentation/login_screen.dart';
+import 'package:recipe/features/auth/presentation/screens/login_screen.dart';
 import 'package:recipe/features/home/presentation/home_screen.dart';
 import 'package:recipe/features/splash/presentation/screens/splash_screen.dart';
 

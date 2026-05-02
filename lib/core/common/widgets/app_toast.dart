@@ -24,28 +24,28 @@ abstract class AppToast {
         context,
         message: message,
         icon: Icons.check_circle_outline,
-        type: _ToastType.success,
+        type: ToastType.success,
       );
 
   static void error(BuildContext context, String message) => show(
         context,
         message: message,
         icon: Icons.error_outline,
-        type: _ToastType.error,
+        type: ToastType.error,
       );
 
   static void warning(BuildContext context, String message) => show(
         context,
         message: message,
         icon: Icons.warning_amber_outlined,
-        type: _ToastType.warning,
+        type: ToastType.warning,
       );
 
   static void info(BuildContext context, String message) => show(
         context,
         message: message,
         icon: Icons.info_outline,
-        type: _ToastType.info,
+        type: ToastType.info,
       );
 
   // ── Core method ───────────────────────────────────────
@@ -54,7 +54,7 @@ abstract class AppToast {
     BuildContext context, {
     required String message,
     IconData? icon,
-    _ToastType type = _ToastType.info,
+    ToastType type = ToastType.info,
     Color? backgroundColor,
     Color? textColor,
     Duration duration = const Duration(seconds: 3),
@@ -106,26 +106,26 @@ abstract class AppToast {
 
   // ── Helpers ───────────────────────────────────────────
 
-  static Color _bgColor(_ToastType type, ColorScheme cs) => switch (type) {
-        _ToastType.success => const Color(0xFF1E6B3C),
-        _ToastType.error => cs.error,
-        _ToastType.warning => const Color(0xFF8A5700),
-        _ToastType.info => cs.inverseSurface,
+  static Color _bgColor(ToastType type, ColorScheme cs) => switch (type) {
+        ToastType.success => const Color(0xFF1E6B3C),
+        ToastType.error => cs.error,
+        ToastType.warning => const Color(0xFF8A5700),
+        ToastType.info => cs.inverseSurface,
       };
 
-  static Color _textColor(_ToastType type, ColorScheme cs) => switch (type) {
-        _ToastType.success => Colors.white,
-        _ToastType.error => cs.onError,
-        _ToastType.warning => Colors.white,
-        _ToastType.info => cs.onInverseSurface,
+  static Color _textColor(ToastType type, ColorScheme cs) => switch (type) {
+        ToastType.success => Colors.white,
+        ToastType.error => cs.onError,
+        ToastType.warning => Colors.white,
+        ToastType.info => cs.onInverseSurface,
       };
 
-  static IconData _icon(_ToastType type) => switch (type) {
-        _ToastType.success => Icons.check_circle_outline,
-        _ToastType.error => Icons.error_outline,
-        _ToastType.warning => Icons.warning_amber_outlined,
-        _ToastType.info => Icons.info_outline,
+  static IconData _icon(ToastType type) => switch (type) {
+        ToastType.success => Icons.check_circle_outline,
+        ToastType.error => Icons.error_outline,
+        ToastType.warning => Icons.warning_amber_outlined,
+        ToastType.info => Icons.info_outline,
       };
 }
 
-enum _ToastType { success, error, warning, info }
+enum ToastType { success, error, warning, info }

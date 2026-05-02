@@ -14,7 +14,7 @@ import 'package:flutter/services.dart';
 ///   validator: (v) => v!.isEmpty ? 'Required' : null,
 /// )
 ///
-/// // Password field
+/// Password field
 /// AppTextField(
 ///   label: 'Password',
 ///   controller: _passController,
@@ -22,7 +22,7 @@ import 'package:flutter/services.dart';
 ///   prefixIcon: Icons.lock_outline,
 /// )
 ///
-/// // Read-only (display)
+///Read-only (display)
 /// AppTextField(
 ///   label: 'Category',
 ///   controller: _catController,
@@ -127,13 +127,16 @@ class _AppTextFieldState extends State<AppTextField> {
     final colorScheme = theme.colorScheme;
 
     final effectiveBorderColor = widget.borderColor ?? colorScheme.outline;
-    final effectiveFocusedBorderColor = widget.focusedBorderColor ?? colorScheme.primary;
-    final effectiveFillColor = widget.fillColor ?? colorScheme.surfaceContainerHighest.withValues(alpha: 0.4);
+    final effectiveFocusedBorderColor =
+        widget.focusedBorderColor ?? colorScheme.primary;
+    final effectiveFillColor =
+        widget.fillColor ??
+        colorScheme.surfaceContainerHighest.withValues(alpha: 0.4);
 
     OutlineInputBorder buildBorder(Color color) => OutlineInputBorder(
-          borderRadius: BorderRadius.circular(widget.borderRadius),
-          borderSide: BorderSide(color: color, width: 1.5),
-        );
+      borderRadius: BorderRadius.circular(widget.borderRadius),
+      borderSide: BorderSide(color: color, width: 1.5),
+    );
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -143,11 +146,12 @@ class _AppTextFieldState extends State<AppTextField> {
           Text(
             widget.label!,
             style: theme.textTheme.labelLarge?.copyWith(
-              color: colorScheme.onSurface,
+              // color: colorScheme.onSurface,
+              color: Colors.black45,
               fontWeight: FontWeight.w500,
             ),
           ),
-          const SizedBox(height: 8),
+          const SizedBox(height: 5),
         ],
         TextFormField(
           controller: widget.controller,
@@ -193,31 +197,48 @@ class _AppTextFieldState extends State<AppTextField> {
               color: widget.errorBorderColor,
             ),
             filled: true,
-            fillColor: widget.enabled ? effectiveFillColor : colorScheme.onSurface.withValues(alpha: 0.08),
-            contentPadding: widget.contentPadding ??
+            fillColor: widget.enabled
+                ? effectiveFillColor
+                : colorScheme.onSurface.withValues(alpha: 0.08),
+            contentPadding:
+                widget.contentPadding ??
                 const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
             counterText: widget.showCounter ? null : '',
 
             // Prefix
-            prefixIcon: widget.prefixWidget ??
+            prefixIcon:
+                widget.prefixWidget ??
                 (widget.prefixIcon != null
-                    ? Icon(widget.prefixIcon, color: colorScheme.onSurface.withValues(alpha: 0.55), size: 20)
+                    ? Icon(
+                        widget.prefixIcon,
+                        color: colorScheme.onSurface.withValues(alpha: 0.55),
+                        size: 20,
+                      )
                     : null),
 
             // Suffix
             suffixIcon: widget.isPassword
                 ? IconButton(
-                    onPressed: () => setState(() => _obscureText = !_obscureText),
+                    onPressed: () =>
+                        setState(() => _obscureText = !_obscureText),
                     icon: Icon(
-                      _obscureText ? Icons.visibility_outlined : Icons.visibility_off_outlined,
+                      _obscureText
+                          ? Icons.visibility_outlined
+                          : Icons.visibility_off_outlined,
                       color: colorScheme.onSurface.withValues(alpha: 0.55),
                       size: 20,
                     ),
                   )
                 : widget.suffixWidget ??
-                    (widget.suffixIcon != null
-                        ? Icon(widget.suffixIcon, color: colorScheme.onSurface.withValues(alpha: 0.55), size: 20)
-                        : null),
+                      (widget.suffixIcon != null
+                          ? Icon(
+                              widget.suffixIcon,
+                              color: colorScheme.onSurface.withValues(
+                                alpha: 0.55,
+                              ),
+                              size: 20,
+                            )
+                          : null),
 
             // Borders
             border: buildBorder(effectiveBorderColor),
@@ -225,7 +246,9 @@ class _AppTextFieldState extends State<AppTextField> {
             focusedBorder: buildBorder(effectiveFocusedBorderColor),
             errorBorder: buildBorder(widget.errorBorderColor),
             focusedErrorBorder: buildBorder(widget.errorBorderColor),
-            disabledBorder: buildBorder(colorScheme.onSurface.withValues(alpha: 0.2)),
+            disabledBorder: buildBorder(
+              colorScheme.onSurface.withValues(alpha: 0.2),
+            ),
           ),
         ),
       ],

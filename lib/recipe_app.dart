@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:recipe/core/routing/app_routes.dart';
 
 class RecipeApp extends StatelessWidget {
@@ -7,9 +8,15 @@ class RecipeApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      onGenerateRoute: AppRoutes.onGenerateRoute,
-      initialRoute: startRoute,
+    return ScreenUtilInit(
+      designSize: const Size(375, 812),
+      minTextAdapt: true,
+      child: MaterialApp(
+        theme: ThemeData(fontFamily: 'PlusJakartaSans'),
+        debugShowCheckedModeBanner: false,
+        onGenerateRoute: AppRoutes.onGenerateRoute,
+        initialRoute: startRoute,
+      ),
     );
   }
 }

@@ -1,31 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 
-/// A smart image widget that handles network, asset, and file images
-/// with built-in loading placeholder and error fallback.
-///
-/// Usage:
-/// ```dart
-/// Network image
-/// AppImage(
-///   imageUrl: 'https://example.com/image.jpg',
-///   width: 200,
-///   height: 200,
-///   fit: BoxFit.cover,
-/// )
-///
-/// Circular avatar
-/// AppImage.circle(
-///   imageUrl: user.avatarUrl,
-///   size: 48,
-/// )
-///
-/// Asset image
-/// AppImage.asset(
-///   assetPath: 'assets/images/banner.png',
-///   width: double.infinity,
-///   height: 180,
-/// )
-/// ```
 class AppImage extends StatelessWidget {
   const AppImage({
     super.key,
@@ -39,9 +14,7 @@ class AppImage extends StatelessWidget {
     this.backgroundColor,
     this.border,
     this.shape = BoxShape.rectangle,
-    // ignore: unused_element
-    bool isAsset = false,
-  }) : _isAsset = isAsset,
+  }) : _isAsset = false,
        assetPath = null,
        size = null;
 
@@ -107,16 +80,14 @@ class AppImage extends StatelessWidget {
         errorBuilder: (context, error, stackTrace) => _buildError(context),
       );
     } else if (imageUrl != null && imageUrl!.isNotEmpty) {
-      imageWidget = Image.network(
-        imageUrl!,
+      // CachedNetworkImage
+      imageWidget = CachedNetworkImage(
+        imageUrl: imageUrl!,
         width: width,
         height: height,
         fit: fit,
-        loadingBuilder: (context, child, loadingProgress) {
-          if (loadingProgress == null) return child;
-          return loadingWidget ?? _buildLoading(context, loadingProgress);
-        },
-        errorBuilder: (context, error, stackTrace) => _buildError(context),
+        placeholder: (context, url) => loadingWidget ?? _buildLoading(context),
+        errorWidget: (context, url, error) => _buildError(context),
       );
     } else {
       imageWidget = _buildError(context);
@@ -150,23 +121,22 @@ class AppImage extends StatelessWidget {
           borderRadius: shape == BoxShape.circle
               ? BorderRadius.circular((size ?? 0) / 2)
               : (borderRadius as BorderRadius? ?? BorderRadius.zero),
-          child: (_isAsset && assetPath != null)
+          child: _isAsset && assetPath != null
+              // Local asset
               ? Image.asset(
                   assetPath!,
                   fit: fit,
                   errorBuilder: (context, error, stackTrace) =>
                       _buildError(context),
                 )
-              : (imageUrl != null && imageUrl!.isNotEmpty)
-              ? Image.network(
-                  imageUrl!,
+              : imageUrl != null && imageUrl!.isNotEmpty
+              // Network — CachedNetworkImage
+              ? CachedNetworkImage(
+                  imageUrl: imageUrl!,
                   fit: fit,
-                  loadingBuilder: (context, child, progress) {
-                    if (progress == null) return child;
-                    return loadingWidget ?? _buildLoading(context, progress);
-                  },
-                  errorBuilder: (context, error, stackTrace) =>
-                      _buildError(context),
+                  placeholder: (context, url) =>
+                      loadingWidget ?? _buildLoading(context),
+                  errorWidget: (context, url, error) => _buildError(context),
                 )
               : _buildError(context),
         ),
@@ -176,7 +146,7 @@ class AppImage extends StatelessWidget {
     return imageWidget;
   }
 
-  Widget _buildLoading(BuildContext context, ImageChunkEvent progress) {
+  Widget _buildLoading(BuildContext context) {
     final colorScheme = Theme.of(context).colorScheme;
     return Container(
       width: width,
@@ -188,9 +158,6 @@ class AppImage extends StatelessWidget {
           height: 28,
           child: CircularProgressIndicator(
             strokeWidth: 2.5,
-            value: progress.expectedTotalBytes != null
-                ? progress.cumulativeBytesLoaded / progress.expectedTotalBytes!
-                : null,
             color: colorScheme.primary.withValues(alpha: 0.6),
           ),
         ),
