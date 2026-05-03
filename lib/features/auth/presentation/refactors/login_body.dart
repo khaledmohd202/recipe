@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:recipe/core/common/widgets/custom_widgets.dart';
+import 'package:recipe/core/extension/extensions.dart';
+import 'package:recipe/core/routing/app_routes.dart';
 import 'package:recipe/core/style/fonts/font_weight_helper.dart';
 import 'package:recipe/core/style/icons/app_icons.dart';
 import 'package:recipe/core/style/images/app_images.dart';
@@ -40,7 +42,7 @@ class _LoginBodyState extends State<LoginBody> {
                 padding: EdgeInsets.only(bottom: 10.h),
                 child: AppImage.asset(
                   assetPath: AppImages.signInBanner,
-                  height: 218.h,
+                  height: 200.h,
                   width: double.infinity,
                   borderRadius: BorderRadius.circular(24.r),
                 ),
@@ -63,7 +65,7 @@ class _LoginBodyState extends State<LoginBody> {
                   color: Color(0xFF64748B),
                 ),
               ),
-              SizedBox(height: 10.h),
+              SizedBox(height: 25.h),
               AppTextField(
                 controller: _emailTextEditingController,
                 label: '  Email',
@@ -99,7 +101,7 @@ class _LoginBodyState extends State<LoginBody> {
               AppElevatedButton(
                 text: 'Sign In',
                 onPressed: () {},
-                backgroundColor: Color(0xFFFF6E42),
+                // backgroundColor: Color(0xFFFF6E42),
                 gradient: LinearGradient(
                   colors: [Color(0xFFFF7043), Color(0xFFE53935)],
                   begin: Alignment.centerLeft,
@@ -110,9 +112,11 @@ class _LoginBodyState extends State<LoginBody> {
               ),
               DividerContinueWith(),
               LogInWithGoogleOrFacebook(),
-              DoNotHaveAnAccount(onTap: () {
-                
-              }),
+              DoNotHaveAnAccount(
+                onTap: () {
+                  context.pushNamed(AppRoutes.register);
+                },
+              ),
             ],
           ),
         ),
