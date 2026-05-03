@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:recipe/core/common/widgets/widgets.dart';
+import 'package:recipe/core/common/widgets/custom_widgets.dart';
 import 'package:recipe/core/style/fonts/font_weight_helper.dart';
 import 'package:recipe/core/style/icons/app_icons.dart';
 import 'package:recipe/core/style/images/app_images.dart';
@@ -30,7 +30,7 @@ class _LoginBodyState extends State<LoginBody> {
         ),
       ),
       body: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 5.h),
+        padding: EdgeInsets.symmetric(horizontal: 16.w),
         child: SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -63,7 +63,7 @@ class _LoginBodyState extends State<LoginBody> {
                   color: Color(0xFF64748B),
                 ),
               ),
-              SizedBox(height: 8.h),
+              SizedBox(height: 10.h),
               AppTextField(
                 controller: _emailTextEditingController,
                 label: '  Email',
@@ -110,7 +110,9 @@ class _LoginBodyState extends State<LoginBody> {
               ),
               DividerContinueWith(),
               LogInWithGoogleOrFacebook(),
-              DoNotHaveAnAccount(),
+              DoNotHaveAnAccount(onTap: () {
+                
+              }),
             ],
           ),
         ),
@@ -120,7 +122,8 @@ class _LoginBodyState extends State<LoginBody> {
 }
 
 class DoNotHaveAnAccount extends StatelessWidget {
-  const DoNotHaveAnAccount({super.key});
+  const DoNotHaveAnAccount({super.key, required this.onTap});
+  final VoidCallback onTap;
 
   @override
   Widget build(BuildContext context) {
@@ -138,9 +141,7 @@ class DoNotHaveAnAccount extends StatelessWidget {
             ),
           ),
           GestureDetector(
-            onTap: () {
-              // navigate to sign up
-            },
+            onTap: onTap,
             child: Text(
               'Sign Up',
               style: TextStyle(
@@ -168,6 +169,7 @@ class LogInWithGoogleOrFacebook extends StatelessWidget {
           text: 'Google',
           width: 160.w,
           height: 60.h,
+          prefixIcon: Image.asset(AppIcons.googleIcon, scale: 0.8),
           backgroundColor: Colors.white,
           textColor: Colors.black54,
           borderColor: Colors.black12,
@@ -178,6 +180,7 @@ class LogInWithGoogleOrFacebook extends StatelessWidget {
           text: 'Facebook',
           width: 160.w,
           height: 60.h,
+          prefixIcon: Image.asset(AppIcons.facebookIcon, scale: 0.9),
           backgroundColor: Colors.white,
           textColor: Colors.black54,
           borderColor: Colors.black12,

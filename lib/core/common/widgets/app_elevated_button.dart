@@ -1,34 +1,5 @@
 import 'package:flutter/material.dart';
 
-/// A fully customizable app-wide ElevatedButton.
-///
-/// Usage:
-/// ```dart
-/// AppButton(
-///   text: 'Submit',
-///   onPressed: () {},
-/// )
-///
-/// With loading state
-/// AppButton(
-///   text: 'Submit',
-///   onPressed: () {},
-///   isLoading: true,
-/// )
-///
-/// Outlined variant
-/// AppButton.outlined(
-///   text: 'Cancel',
-///   onPressed: () {},
-/// )
-///
-/// Icon + text
-/// AppButton(
-///   text: 'Add to Cart',
-///   onPressed: () {},
-///   prefixIcon: Icons.shopping_cart,
-/// )
-/// ```
 class AppElevatedButton extends StatelessWidget {
   const AppElevatedButton({
     required this.text,
@@ -51,7 +22,6 @@ class AppElevatedButton extends StatelessWidget {
     this.padding,
   }) : _isOutlined = false;
 
-  /// Outlined variant constructor
   const AppElevatedButton.outlined({
     required this.text,
     required this.onPressed,
@@ -71,32 +41,25 @@ class AppElevatedButton extends StatelessWidget {
     this.gradient,
     this.elevation = 0,
     this.padding,
-  })  : _isOutlined = true;
+  }) : _isOutlined = true;
 
   final String text;
   final VoidCallback? onPressed;
-
   final double? width;
   final double height;
-
   final Color? backgroundColor;
   final Color? textColor;
   final Color? borderColor;
-
   final double borderRadius;
   final double fontSize;
   final FontWeight fontWeight;
-
   final bool isLoading;
   final bool isDisabled;
-
-  final IconData? prefixIcon;
-  final IconData? suffixIcon;
-
+  final Widget? prefixIcon;
+  final Widget? suffixIcon;
   final Gradient? gradient;
   final double elevation;
   final EdgeInsetsGeometry? padding;
-
   final bool _isOutlined;
 
   @override
@@ -105,7 +68,8 @@ class AppElevatedButton extends StatelessWidget {
     final colorScheme = theme.colorScheme;
 
     final effectiveBg = backgroundColor ?? colorScheme.primary;
-    final effectiveTextColor = textColor ?? (_isOutlined ? effectiveBg : colorScheme.onPrimary);
+    final effectiveTextColor =
+        textColor ?? (_isOutlined ? effectiveBg : colorScheme.onPrimary);
     final isEnabled = !isDisabled && !isLoading;
 
     final shape = RoundedRectangleBorder(
@@ -129,7 +93,7 @@ class AppElevatedButton extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               if (prefixIcon != null) ...[
-                Icon(prefixIcon, color: effectiveTextColor, size: fontSize + 4),
+                prefixIcon!,
                 const SizedBox(width: 8),
               ],
               Text(
@@ -142,12 +106,11 @@ class AppElevatedButton extends StatelessWidget {
               ),
               if (suffixIcon != null) ...[
                 const SizedBox(width: 8),
-                Icon(suffixIcon, color: effectiveTextColor, size: fontSize + 4),
+                suffixIcon!,
               ],
             ],
           );
 
-    // If gradient is provided, wrap in a Container
     if (gradient != null && !_isOutlined) {
       return SizedBox(
         width: width ?? double.infinity,
@@ -155,7 +118,9 @@ class AppElevatedButton extends StatelessWidget {
         child: DecoratedBox(
           decoration: BoxDecoration(
             gradient: isEnabled ? gradient : null,
-            color: isEnabled ? null : colorScheme.onSurface.withValues(alpha: 0.12),
+            color: isEnabled
+                ? null
+                : colorScheme.onSurface.withValues(alpha: 0.12),
             borderRadius: BorderRadius.circular(borderRadius),
           ),
           child: ElevatedButton(
@@ -181,8 +146,12 @@ class AppElevatedButton extends StatelessWidget {
         style: ElevatedButton.styleFrom(
           backgroundColor: _isOutlined ? Colors.transparent : effectiveBg,
           foregroundColor: effectiveTextColor,
-          disabledBackgroundColor: colorScheme.onSurface.withValues(alpha: 0.12),
-          disabledForegroundColor: colorScheme.onSurface.withValues(alpha: 0.38),
+          disabledBackgroundColor: colorScheme.onSurface.withValues(
+            alpha: 0.12,
+          ),
+          disabledForegroundColor: colorScheme.onSurface.withValues(
+            alpha: 0.38,
+          ),
           elevation: elevation,
           shadowColor: Colors.transparent,
           padding: padding ?? const EdgeInsets.symmetric(horizontal: 24),

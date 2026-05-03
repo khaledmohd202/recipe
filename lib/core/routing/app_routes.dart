@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:recipe/core/routing/routing_animation.dart';
 import 'package:recipe/features/auth/presentation/screens/login_screen.dart';
+import 'package:recipe/features/auth/presentation/screens/registration_screen.dart';
 import 'package:recipe/features/home/presentation/home_screen.dart';
 import 'package:recipe/features/splash/presentation/screens/splash_screen.dart';
 
@@ -19,6 +20,8 @@ class AppRoutes {
         return AnimationRouting(page: SplashScreen());
       case login:
         return AnimationRouting(page: LoginScreen());
+      case register:
+        return AnimationRouting(page: RegistrationScreen());
       case home:
         return AnimationRouting(page: HomeScreen());
 
