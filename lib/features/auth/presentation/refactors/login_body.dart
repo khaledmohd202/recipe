@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:recipe/core/app/localization/localization_cubit.dart';
+import 'package:recipe/core/app/theme_cubit/theme_cubit.dart';
 import 'package:recipe/core/common/widgets/custom_widgets.dart';
 import 'package:recipe/core/extension/extensions.dart';
+import 'package:recipe/core/languages/lang_keys.dart';
 import 'package:recipe/core/routing/app_routes.dart';
 import 'package:recipe/core/style/fonts/font_weight_helper.dart';
 import 'package:recipe/core/style/icons/app_icons.dart';
@@ -19,17 +23,32 @@ class _LoginBodyState extends State<LoginBody> {
       TextEditingController();
   final TextEditingController _passwordTextEditingController =
       TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Recipe Finder'),
+        title: Text(context.transl(LangKeys.appName)),
         centerTitle: true,
         automaticallyImplyLeading: false,
         leading: Padding(
           padding: EdgeInsets.only(left: 10.w),
           child: Image.asset(AppIcons.signIn),
         ),
+        actions: [
+          IconButton(
+            onPressed: () => context.read<ThemeCubit>().toggleTheme(),
+            icon: Icon(
+              context.watch<ThemeCubit>().isDark
+                  ? Icons.light_mode
+                  : Icons.dark_mode,
+            ),
+          ),
+          IconButton(
+            onPressed: () => context.read<LocalizationCubit>().toggleLanguage(),
+            icon: const Icon(Icons.language),
+          ),
+        ],
       ),
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: 16.w),
@@ -37,7 +56,6 @@ class _LoginBodyState extends State<LoginBody> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // Sign-in Banner.
               Padding(
                 padding: EdgeInsets.only(bottom: 10.h),
                 child: AppImage.asset(
@@ -47,9 +65,8 @@ class _LoginBodyState extends State<LoginBody> {
                   borderRadius: BorderRadius.circular(24.r),
                 ),
               ),
-              // Title & Description.
               Text(
-                ' Welcome Back',
+                context.transl(LangKeys.welcomeBack),
                 style: TextStyle(
                   fontSize: 32.sp,
                   fontWeight: FontWeightHelper.bold,
@@ -58,31 +75,31 @@ class _LoginBodyState extends State<LoginBody> {
               ),
               SizedBox(height: 2.h),
               Text(
-                ' Sign in to continue your culinary journey',
+                context.transl(LangKeys.signInSubtitle),
                 style: TextStyle(
                   fontSize: 16.sp,
                   fontWeight: FontWeightHelper.light,
-                  color: Color(0xFF64748B),
+                  color: const Color(0xFF64748B),
                 ),
               ),
               SizedBox(height: 25.h),
               AppTextField(
                 controller: _emailTextEditingController,
-                label: '  Email',
-                hintText: 'Enter your email',
+                label: context.transl(LangKeys.email),
+                hintText: context.transl(LangKeys.emailHint),
                 keyboardType: TextInputType.emailAddress,
-                focusedBorderColor: Color(0xFFE53935),
+                focusedBorderColor: const Color(0xFFE53935),
                 borderRadius: 18.r,
                 borderColor: Colors.black26,
               ),
               SizedBox(height: 8.h),
               AppTextField(
                 controller: _passwordTextEditingController,
-                label: '  Password',
-                hintText: 'Enter your Password',
+                label: context.transl(LangKeys.password),
+                hintText: context.transl(LangKeys.passwordHint),
                 isPassword: true,
                 keyboardType: TextInputType.emailAddress,
-                focusedBorderColor: Color(0xFFE53935),
+                focusedBorderColor: const Color(0xFFE53935),
                 borderRadius: 18.r,
                 borderColor: Colors.black26,
               ),
@@ -92,17 +109,19 @@ class _LoginBodyState extends State<LoginBody> {
                 child: GestureDetector(
                   onTap: () {},
                   child: Text(
-                    'Forgot Password?',
-                    style: TextStyle(color: Color(0xFFFF6E42), fontSize: 14.sp),
+                    context.transl(LangKeys.forgotPassword),
+                    style: TextStyle(
+                      color: const Color(0xFFFF6E42),
+                      fontSize: 14.sp,
+                    ),
                   ),
                 ),
               ),
               SizedBox(height: 16.h),
               AppElevatedButton(
-                text: 'Sign In',
+                text: context.transl(LangKeys.signIn),
                 onPressed: () {},
-                // backgroundColor: Color(0xFFFF6E42),
-                gradient: LinearGradient(
+                gradient: const LinearGradient(
                   colors: [Color(0xFFFF7043), Color(0xFFE53935)],
                   begin: Alignment.centerLeft,
                   end: Alignment.centerRight,
@@ -110,12 +129,10 @@ class _LoginBodyState extends State<LoginBody> {
                 textColor: Colors.white,
                 borderRadius: 18.r,
               ),
-              DividerContinueWith(),
-              LogInWithGoogleOrFacebook(),
+              const DividerContinueWith(),
+              const LogInWithGoogleOrFacebook(),
               DoNotHaveAnAccount(
-                onTap: () {
-                  context.pushNamed(AppRoutes.register);
-                },
+                onTap: () => context.pushNamed(AppRoutes.register),
               ),
             ],
           ),
@@ -137,7 +154,7 @@ class DoNotHaveAnAccount extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Text(
-            "Don't have an account? ",
+            context.transl(LangKeys.noAccount),
             style: TextStyle(
               fontSize: 16.sp,
               fontWeight: FontWeightHelper.regular,
@@ -147,11 +164,11 @@ class DoNotHaveAnAccount extends StatelessWidget {
           GestureDetector(
             onTap: onTap,
             child: Text(
-              'Sign Up',
+              context.transl(LangKeys.signUp),
               style: TextStyle(
                 fontSize: 16.sp,
                 fontWeight: FontWeightHelper.semiBold,
-                color: Color(0xFFFF7043),
+                color: const Color(0xFFFF7043),
               ),
             ),
           ),
@@ -170,24 +187,24 @@ class LogInWithGoogleOrFacebook extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         AppElevatedButton.outlined(
-          text: 'Google',
+          text: context.transl(LangKeys.google),
           width: 160.w,
           height: 60.h,
           prefixIcon: Image.asset(AppIcons.googleIcon, scale: 0.8),
-          backgroundColor: Colors.white,
-          textColor: Colors.black54,
-          borderColor: Colors.black12,
+          backgroundColor: context.colorScheme.surface,
+          textColor: context.colorScheme.onSurface,
+          borderColor: context.colorScheme.outlineVariant,
           borderRadius: 18.r,
           onPressed: () {},
         ),
         AppElevatedButton.outlined(
-          text: 'Facebook',
+          text: context.transl(LangKeys.apple),
           width: 160.w,
           height: 60.h,
           prefixIcon: Image.asset(AppIcons.facebookIcon, scale: 0.9),
-          backgroundColor: Colors.white,
-          textColor: Colors.black54,
-          borderColor: Colors.black12,
+          backgroundColor: context.colorScheme.surface,
+          textColor: context.colorScheme.onSurface,
+          borderColor: context.colorScheme.outlineVariant,
           borderRadius: 18.r,
           onPressed: () {},
         ),
@@ -202,23 +219,30 @@ class DividerContinueWith extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsetsGeometry.symmetric(vertical: 10.h),
+      padding: EdgeInsets.symmetric(vertical: 10.h),
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Expanded(
-            child: Divider(color: Colors.black26, endIndent: 10, indent: 10),
+            child: Divider(
+              color: context.colorScheme.outlineVariant,
+              endIndent: 10,
+              indent: 10,
+            ),
           ),
           Text(
-            'or continue with',
+            context.transl(LangKeys.orContinueWith),
             style: TextStyle(
-              color: Colors.black45,
+              color: context.colorScheme.onSurface.withValues(alpha: 0.5),
               fontSize: 15.sp,
               fontWeight: FontWeightHelper.bold,
             ),
           ),
           Expanded(
-            child: Divider(color: Colors.black26, endIndent: 10, indent: 10),
+            child: Divider(
+              color: context.colorScheme.outlineVariant,
+              endIndent: 10,
+              indent: 10,
+            ),
           ),
         ],
       ),

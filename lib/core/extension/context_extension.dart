@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:recipe/core/languages/app_localizations.dart';
+import 'package:recipe/core/style/theme/colors_extension.dart';
 
 extension ContextExtension on BuildContext {
   // Navigation Extensions.
@@ -34,6 +36,12 @@ extension ContextExtension on BuildContext {
   TextTheme get textTheme => Theme.of(this).textTheme;
 
   bool get isDark => Theme.of(this).brightness == Brightness.dark;
+
+  MyColors get appColors => Theme.of(this).extension<MyColors>()!;
+
+  // Localization Extensions.
+  String transl(String key) => AppLocalizations.of(this)!.translate(key);
+  bool get isArabic => AppLocalizations.of(this)!.isArabic;
 
   // Screen Size Extensions.
   double get screenWidth => MediaQuery.sizeOf(this).width;
