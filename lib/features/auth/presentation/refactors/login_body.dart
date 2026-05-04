@@ -10,6 +10,7 @@ import 'package:recipe/core/routing/app_routes.dart';
 import 'package:recipe/core/style/fonts/font_weight_helper.dart';
 import 'package:recipe/core/style/icons/app_icons.dart';
 import 'package:recipe/core/style/images/app_images.dart';
+import 'package:recipe/features/auth/presentation/bloc/auth_cubit.dart';
 
 class LoginBody extends StatefulWidget {
   const LoginBody({super.key});
@@ -23,6 +24,13 @@ class _LoginBodyState extends State<LoginBody> {
       TextEditingController();
   final TextEditingController _passwordTextEditingController =
       TextEditingController();
+
+  @override
+  void dispose() {
+    _emailTextEditingController.dispose();
+    _passwordTextEditingController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -118,16 +126,32 @@ class _LoginBodyState extends State<LoginBody> {
                 ),
               ),
               SizedBox(height: 16.h),
-              AppElevatedButton(
-                text: context.transl(LangKeys.signIn),
-                onPressed: () {},
-                gradient: const LinearGradient(
-                  colors: [Color(0xFFFF7043), Color(0xFFE53935)],
-                  begin: Alignment.centerLeft,
-                  end: Alignment.centerRight,
-                ),
-                textColor: Colors.white,
-                borderRadius: 18.r,
+              BlocConsumer<AuthCubit, AuthState>(
+                listener: (context, state) {
+                  if (state is AuthSuccess) {
+                    context.pushNamedAndRemoveUntil(AppRoutes.main);
+                  } else if (state is AuthFailure) {
+                    AppToast.error(context, state.message);
+                  }
+                },
+                builder: (context, state) {
+                  return AppElevatedButton(
+                    text: context.transl(LangKeys.signIn),
+                    onPressed: () {
+                      context.read<AuthCubit>().signIn(
+                        email: _emailTextEditingController.text.trim(),
+                        password: _passwordTextEditingController.text.trim(),
+                      );
+                    },
+                    gradient: const LinearGradient(
+                      colors: [Color(0xFFFF7043), Color(0xFFE53935)],
+                      begin: Alignment.centerLeft,
+                      end: Alignment.centerRight,
+                    ),
+                    textColor: Colors.white,
+                    borderRadius: 18.r,
+                  );
+                },
               ),
               const DividerContinueWith(),
               const LogInWithGoogleOrFacebook(),

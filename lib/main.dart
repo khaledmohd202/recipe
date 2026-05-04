@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
+import 'package:recipe/core/app/env/env_helper.dart';
 import 'package:recipe/core/app/localization/localization_cubit.dart';
 import 'package:recipe/core/app/theme_cubit/theme_cubit.dart';
 import 'package:recipe/core/di/injection_container.dart';
 import 'package:recipe/core/routing/app_routes.dart';
 import 'package:recipe/recipe_app.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -15,6 +18,13 @@ void main() async {
   );
 
   await setupInjector();
+
+  await dotenv.load(fileName: '.env');
+
+  await Supabase.initialize(
+    url: EnvHelper.supabaseUrl,
+    anonKey: EnvHelper.supabaseAnonKey,
+  );
 
   String startRoute = AppRoutes.splash;
 

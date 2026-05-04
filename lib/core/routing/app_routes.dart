@@ -3,6 +3,7 @@ import 'package:recipe/core/routing/routing_animation.dart';
 import 'package:recipe/features/auth/presentation/screens/login_screen.dart';
 import 'package:recipe/features/auth/presentation/screens/registration_screen.dart';
 import 'package:recipe/features/home/presentation/home_screen.dart';
+import 'package:recipe/features/main/presentation/screens/main_screen.dart';
 import 'package:recipe/features/splash/presentation/screens/splash_screen.dart';
 
 class AppRoutes {
@@ -10,6 +11,7 @@ class AppRoutes {
   static const String login = '/login';
   static const String register = '/register';
   static const String home = '/home';
+  static const String main = '/main';
 
   static Route<void> onGenerateRoute(RouteSettings settings) {
     // ignore: unused_local_variable
@@ -22,6 +24,8 @@ class AppRoutes {
         return AnimationRouting(page: LoginScreen());
       case register:
         return AnimationRouting(page: RegistrationScreen());
+      case main:
+        return AnimationRouting(page: MainScreen());
       case home:
         return AnimationRouting(page: HomeScreen());
 
