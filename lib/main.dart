@@ -24,6 +24,9 @@ void main() async {
   await Supabase.initialize(
     url: EnvHelper.supabaseUrl,
     anonKey: EnvHelper.supabaseAnonKey,
+    authOptions: const FlutterAuthClientOptions(
+      authFlowType: AuthFlowType.pkce,
+    ),
   );
 
   String startRoute = AppRoutes.splash;

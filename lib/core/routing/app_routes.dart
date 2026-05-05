@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:recipe/core/di/injection_container.dart';
 import 'package:recipe/core/routing/routing_animation.dart';
+import 'package:recipe/features/auth/presentation/bloc/sign_in_with_google_and_facebook/sign_in_with_google_and_facebook_cubit.dart';
 import 'package:recipe/features/auth/presentation/screens/login_screen.dart';
 import 'package:recipe/features/auth/presentation/screens/registration_screen.dart';
 import 'package:recipe/features/home/presentation/home_screen.dart';
@@ -21,20 +24,31 @@ class AppRoutes {
       case splash:
         return AnimationRouting(page: SplashScreen());
       case login:
-        return AnimationRouting(page: LoginScreen());
+        return AnimationRouting(
+          page: BlocProvider(
+            create: (context) => sl<SignInWithGoogleAndFacebookCubit>(),
+            child: LoginScreen(),
+          ),
+        );
       case register:
-        return AnimationRouting(page: RegistrationScreen());
+        return AnimationRouting(
+          page: BlocProvider(
+            create: (context) => sl<SignInWithGoogleAndFacebookCubit>(),
+            child: RegistrationScreen(),
+          ),
+        );
       case main:
         return AnimationRouting(page: MainScreen());
       case home:
         return AnimationRouting(page: HomeScreen());
 
       default:
-        // return kDebugMode
-        // ?
+        //   // return kDebugMode
+        //   // ?
         return AnimationRouting(
           page: Scaffold(
-            body: Center(child: Text('Page not found ${settings.name}')),
+            // body: Center(child: Text('Page not found ${settings.name}')),
+            body: SizedBox.shrink(),
           ),
         );
       // : AnimationRouting(page: const MainScreen());

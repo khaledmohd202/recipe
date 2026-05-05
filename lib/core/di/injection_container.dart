@@ -4,6 +4,7 @@ import 'package:recipe/core/app/theme_cubit/theme_cubit.dart';
 import 'package:recipe/features/auth/data/data_source/auth_data_source.dart';
 import 'package:recipe/features/auth/data/repo/auth_repo.dart';
 import 'package:recipe/features/auth/presentation/bloc/auth_cubit.dart';
+import 'package:recipe/features/auth/presentation/bloc/sign_in_with_google_and_facebook/sign_in_with_google_and_facebook_cubit.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
@@ -12,6 +13,11 @@ final sl = GetIt.instance;
 Future<void> setupInjector() async {
   await _initCore();
   await _initAuth();
+  await _initAuthWithGoogleAndFacebook();
+}
+
+Future<void> _initAuthWithGoogleAndFacebook() async {
+  sl.registerFactory(() => SignInWithGoogleAndFacebookCubit());
 }
 
 Future<void> _initCore() async {
