@@ -6,7 +6,7 @@ import 'package:recipe/features/auth/presentation/bloc/sign_in_with_google_and_f
 import 'package:recipe/features/auth/presentation/screens/login_screen.dart';
 import 'package:recipe/features/auth/presentation/screens/registration_screen.dart';
 import 'package:recipe/features/favorites/presentation/screens/favorites_screen.dart';
-import 'package:recipe/features/home/presentation/home_screen.dart';
+import 'package:recipe/features/home/presentation/screens/home_screen.dart';
 import 'package:recipe/features/main/presentation/screens/main_screen.dart';
 import 'package:recipe/features/profile/presentation/screens/profile_screen.dart';
 import 'package:recipe/features/splash/presentation/screens/splash_screen.dart';

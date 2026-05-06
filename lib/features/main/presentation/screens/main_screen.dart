@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:recipe/features/favorites/presentation/screens/favorites_screen.dart';
-import 'package:recipe/features/home/presentation/home_screen.dart';
+import 'package:recipe/features/home/presentation/screens/home_screen.dart';
 import 'package:recipe/features/main/presentation/widgets/bottom_nav_item.dart';
 import 'package:recipe/features/profile/presentation/screens/profile_screen.dart';
 
