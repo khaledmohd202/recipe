@@ -31,13 +31,13 @@ void main() async {
 
   String startRoute = AppRoutes.splash;
 
-  // if (seenOnboarding == null) {
-  //   startRoute = AppRoutes.onboarding;
-  // } else if (token != null) {
-  //   startRoute = AppRoutes.main;
-  // } else {
-  //   startRoute = AppRoutes.signIn;
-  // }
+  final token = Supabase.instance.client.auth.currentSession;
+
+  if (token != null) {
+    startRoute = AppRoutes.main;
+  } else {
+    startRoute = AppRoutes.login;
+  }
 
   runApp(
     MultiBlocProvider(

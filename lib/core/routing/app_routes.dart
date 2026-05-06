@@ -5,8 +5,10 @@ import 'package:recipe/core/routing/routing_animation.dart';
 import 'package:recipe/features/auth/presentation/bloc/sign_in_with_google_and_facebook/sign_in_with_google_and_facebook_cubit.dart';
 import 'package:recipe/features/auth/presentation/screens/login_screen.dart';
 import 'package:recipe/features/auth/presentation/screens/registration_screen.dart';
+import 'package:recipe/features/favorites/presentation/screens/favorites_screen.dart';
 import 'package:recipe/features/home/presentation/home_screen.dart';
 import 'package:recipe/features/main/presentation/screens/main_screen.dart';
+import 'package:recipe/features/profile/presentation/screens/profile_screen.dart';
 import 'package:recipe/features/splash/presentation/screens/splash_screen.dart';
 
 class AppRoutes {
@@ -15,6 +17,8 @@ class AppRoutes {
   static const String register = '/register';
   static const String home = '/home';
   static const String main = '/main';
+  static const String favorites = '/favorites';
+  static const String profile = '/profile';
 
   static Route<void> onGenerateRoute(RouteSettings settings) {
     // ignore: unused_local_variable
@@ -41,10 +45,14 @@ class AppRoutes {
         return AnimationRouting(page: MainScreen());
       case home:
         return AnimationRouting(page: HomeScreen());
+      case favorites:
+        return AnimationRouting(page: FavoritesScreen());
+      case profile:
+        return AnimationRouting(page: ProfileScreen());
 
       default:
-        //   // return kDebugMode
-        //   // ?
+        // return kDebugMode
+        //  ?
         return AnimationRouting(
           page: Scaffold(
             // body: Center(child: Text('Page not found ${settings.name}')),
