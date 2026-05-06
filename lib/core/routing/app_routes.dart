@@ -50,14 +50,16 @@ class AppRoutes {
       case main:
         return AnimationRouting(page: MainScreen());
       case home:
-        return AnimationRouting(
-          page: HomeScreen(),
-        );
+        return AnimationRouting(page: HomeScreen());
       case meals:
+      final args = settings.arguments as Map<String, String>;
         return AnimationRouting(
           page: BlocProvider(
-            create: (context) =>
-                sl<MealsCubit>()..getMealsByCategory(arguments.toString()),
+            create: (context) => sl<MealsCubit>()
+              ..getMealsByCategory(
+                categoryId: args['categoryId']!,
+                categoryName: args['categoryName']!,
+              ),
             child: MealsScreen(),
           ),
         );

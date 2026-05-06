@@ -6,11 +6,16 @@ class MealsDataSource {
 
   final SupabaseClient _client;
 
-  Future<List<MealModel>> getMealsByCategory(String categoryId) async {
+  Future<List<MealModel>> getMealsByCategory({
+    required String categoryId,
+    required int skip,
+    required int limit,
+  }) async {
     final response = await _client
         .from('meals')
         .select()
-        .eq('category_id', categoryId);
+        .eq('category_id', categoryId)
+        .range(skip, skip + limit - 1);
 
     return (response as List).map((e) => MealModel.fromJson(e)).toList();
   }
