@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:recipe/core/common/widgets/custom_widgets.dart';
+import 'package:recipe/core/extension/extensions.dart';
+import 'package:recipe/core/routing/app_routes.dart';
 import 'package:recipe/core/style/colors/app_colors.dart';
 import 'package:recipe/core/style/icons/app_icons.dart';
+import 'package:recipe/features/home/presentation/bloc/home_cubit.dart';
 import 'package:recipe/features/home/presentation/widgets/home_search_bar.dart';
 
 class HomeBody extends StatelessWidget {
@@ -47,32 +52,71 @@ class HomeGridView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-      child: GridView.builder(
-        shrinkWrap: true,
-        padding: EdgeInsets.symmetric(vertical: 20.h),
-        itemCount: 6,
-        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 2,
-          mainAxisSpacing: 5.w,
-          crossAxisSpacing: 15.h,
-          childAspectRatio: 0.8,
-          // mainAxisExtent: 100.h,
-        ),
-        itemBuilder: (context, index) {
-          return Center(
-            child: Container(
-              width: 155.w,
-              height: 180.h,
-              decoration: BoxDecoration(
-                color: Colors.amber,
-                borderRadius: BorderRadius.circular(24.r),
+    return BlocBuilder<HomeCubit, HomeState>(
+      builder: (context, state) {
+        if (state is HomeLoading) {
+          return Expanded(child: ShimmerProductCard());
+        }
+        if (state is HomeError) {
+          return Expanded(child: DefaultErrorWidget(message: state.message));
+        }
+        if (state is HomeSuccess) {
+          return Expanded(
+            child: GridView.builder(
+              shrinkWrap: true,
+              padding: EdgeInsets.symmetric(vertical: 20.h),
+              itemCount: 6,
+              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 2,
+                mainAxisSpacing: 15.w,
+                crossAxisSpacing: 15.h,
+                childAspectRatio: 0.8,
+                // mainAxisExtent: 100.h,
               ),
-              child: Center(child: Text('data')),
+              itemBuilder: (context, index) {
+                final category = state.categories[index];
+                return GestureDetector(
+                  onTap: () {
+                    context.pushNamed(AppRoutes.meals, arguments: category.id);
+                  },
+                  child: Container(
+                    width: 155.w,
+                    height: 180.h,
+                    decoration: BoxDecoration(
+                      color: Colors.amber,
+                      borderRadius: BorderRadius.circular(24.r),
+                    ),
+                    child: Stack(
+                      children: [
+                        AppImage(
+                          imageUrl: category.imageUrl,
+                          fit: BoxFit.fill,
+                          height: double.infinity,
+                          width: double.infinity,
+                          borderRadius: BorderRadius.circular(15.r),
+                        ),
+                        Positioned(
+                          bottom: 10.h,
+                          left: 10.w,
+                          child: Text(
+                            category.name.toUpperCase(),
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 16.sp,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                );
+              },
             ),
           );
-        },
-      ),
+        }
+        return const SizedBox.shrink();
+      },
     );
   }
 }

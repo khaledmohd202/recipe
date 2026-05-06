@@ -8,6 +8,10 @@ import 'package:recipe/features/auth/presentation/screens/registration_screen.da
 import 'package:recipe/features/favorites/presentation/screens/favorites_screen.dart';
 import 'package:recipe/features/home/presentation/screens/home_screen.dart';
 import 'package:recipe/features/main/presentation/screens/main_screen.dart';
+import 'package:recipe/features/meal_details/presentation/bloc/meal_details_cubit.dart';
+import 'package:recipe/features/meal_details/presentation/screens/meal_details_screen.dart';
+import 'package:recipe/features/meals/presentation/bloc/meals_cubit.dart';
+import 'package:recipe/features/meals/presentation/screens/meals_screen.dart';
 import 'package:recipe/features/profile/presentation/screens/profile_screen.dart';
 import 'package:recipe/features/splash/presentation/screens/splash_screen.dart';
 
@@ -16,6 +20,8 @@ class AppRoutes {
   static const String login = '/login';
   static const String register = '/register';
   static const String home = '/home';
+  static const String meals = '/meals';
+  static const String mealDetails = 'mealDetails';
   static const String main = '/main';
   static const String favorites = '/favorites';
   static const String profile = '/profile';
@@ -44,7 +50,25 @@ class AppRoutes {
       case main:
         return AnimationRouting(page: MainScreen());
       case home:
-        return AnimationRouting(page: HomeScreen());
+        return AnimationRouting(
+          page: HomeScreen(),
+        );
+      case meals:
+        return AnimationRouting(
+          page: BlocProvider(
+            create: (context) =>
+                sl<MealsCubit>()..getMealsByCategory(arguments.toString()),
+            child: MealsScreen(),
+          ),
+        );
+      case mealDetails:
+        return AnimationRouting(
+          page: BlocProvider(
+            create: (context) =>
+                sl<MealDetailsCubit>()..getMealDetail(arguments.toString()),
+            child: MealDetailsScreen(),
+          ),
+        );
       case favorites:
         return AnimationRouting(page: FavoritesScreen());
       case profile:
