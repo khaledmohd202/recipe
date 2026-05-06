@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:recipe/core/common/widgets/app_list_fallback_widget.dart';
-import 'package:recipe/core/common/widgets/app_shimmer.dart';
 import 'package:recipe/core/style/colors/app_colors.dart';
 import 'package:recipe/features/meals/presentation/bloc/meals_cubit.dart';
 import 'package:recipe/features/meals/presentation/widgets/meals_grid.dart';
+import 'package:recipe/features/meals/presentation/widgets/meals_shimmer.dart';
 
 class MealsBody extends StatefulWidget {
   const MealsBody({super.key});
@@ -60,19 +60,7 @@ class _MealsBodyState extends State<MealsBody> {
       body: BlocBuilder<MealsCubit, MealsState>(
         builder: (context, state) {
           if (state is MealsLoading && cubit.meals.isEmpty) {
-            return GridView.builder(
-              padding: EdgeInsets.symmetric(horizontal: 15.w, vertical: 20.h),
-              itemCount: 6,
-              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 2,
-                mainAxisSpacing: 15.w,
-                crossAxisSpacing: 15.h,
-                childAspectRatio: 0.7,
-              ),
-              itemBuilder: (context, index) {
-                return ShimmerBox(width: 155.w, height: 180.h);
-              },
-            );
+            return MealsShimmer();
           }
 
           if (state is MealsError) {
@@ -89,3 +77,5 @@ class _MealsBodyState extends State<MealsBody> {
     );
   }
 }
+
+
