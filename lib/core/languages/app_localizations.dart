@@ -30,4 +30,16 @@ class AppLocalizations {
   String translate(String key) => _localizedStrings[key] ?? key;
 
   bool get isArabic => locale.languageCode == 'ar';
+
+  String translateCategory(String categoryName) {
+    final categories = _localizedStrings['categories'] as Map?;
+    if (categories == null) return categoryName;
+    return categories[categoryName] ?? categoryName;
+  }
+
+  String translateMeal(String mealName) {
+    final meals = _localizedStrings['meals'] as Map?;
+    if (meals == null) return mealName;
+    return meals[mealName] ?? mealName;
+  }
 }
