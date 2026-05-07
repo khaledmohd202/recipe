@@ -29,6 +29,12 @@ class MealDetailModel {
   });
 
   factory MealDetailModel.fromJson(Map<String, dynamic> json) {
+    final instructions =
+        (json['instructions'] as List)
+            .map((e) => InstructionModel.fromJson(e))
+            .toList()
+          ..sort((a, b) => a.stepNumber.compareTo(b.stepNumber));
+
     return MealDetailModel(
       id: json['id'] as String,
       categoryId: json['category_id'] as String,
@@ -42,9 +48,7 @@ class MealDetailModel {
       ingredients: (json['ingredients'] as List)
           .map((e) => IngredientModel.fromJson(e))
           .toList(),
-      instructions: (json['instructions'] as List)
-          .map((e) => InstructionModel.fromJson(e))
-          .toList(),
+      instructions: instructions,
     );
   }
 }

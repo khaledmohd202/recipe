@@ -9,7 +9,7 @@ class MealDetailsDataSource {
   Future<MealDetailModel> getMealDetails(String mealId) async {
     final response = await _client
         .from('meals')
-        .select('*, ingredients(*), instructions(order: step_number.asc)')
+        .select('*, ingredients(*), instructions(*)')
         .eq('id', mealId)
         .single();
 
