@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:recipe/features/favorites/presentation/bloc/favorites_cubit.dart';
 import 'package:recipe/features/meal_details/data/models/meal_detail_model.dart';
 import 'package:recipe/features/meal_details/presentation/bloc/meal_details_cubit.dart';
 import 'package:recipe/features/meal_details/presentation/widgets/meal_details_app_bar.dart';
@@ -18,6 +19,12 @@ class MealDetailsBody extends StatefulWidget {
 }
 
 class _MealDetailsBodyState extends State<MealDetailsBody> {
+  @override
+  void initState() {
+    super.initState();
+    context.read<FavoritesCubit>().getFavorites();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

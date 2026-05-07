@@ -5,6 +5,9 @@ import 'package:recipe/features/auth/data/data_source/auth_data_source.dart';
 import 'package:recipe/features/auth/data/repo/auth_repo.dart';
 import 'package:recipe/features/auth/presentation/bloc/auth_cubit.dart';
 import 'package:recipe/features/auth/presentation/bloc/sign_in_with_google_and_facebook/sign_in_with_google_and_facebook_cubit.dart';
+import 'package:recipe/features/favorites/data/data_source/favorites_data_source.dart';
+import 'package:recipe/features/favorites/data/repo/favorites_repo.dart';
+import 'package:recipe/features/favorites/presentation/bloc/favorites_cubit.dart';
 import 'package:recipe/features/home/data/data_source/home_data_source.dart';
 import 'package:recipe/features/home/data/repo/home_repo.dart';
 import 'package:recipe/features/home/presentation/bloc/home_cubit.dart';
@@ -26,6 +29,7 @@ Future<void> setupInjector() async {
   await _initHome();
   await _initMeals();
   await _initMealDetail();
+  await _initFavorites();
 }
 
 Future<void> _initCore() async {
@@ -70,4 +74,13 @@ Future<void> _initMealDetail() async {
     )
     ..registerLazySingleton<MealDetailsRepo>(() => MealDetailsRepo(sl()))
     ..registerFactory<MealDetailsCubit>(() => MealDetailsCubit(sl()));
+}
+
+Future<void> _initFavorites() async {
+  sl
+    ..registerLazySingleton<FavoritesDataSource>(
+      () => FavoritesDataSource(sl()),
+    )
+    ..registerLazySingleton<FavoritesRepo>(() => FavoritesRepo(sl()))
+    ..registerLazySingleton<FavoritesCubit>(() => FavoritesCubit(sl()));
 }

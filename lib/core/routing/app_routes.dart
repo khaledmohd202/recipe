@@ -5,6 +5,7 @@ import 'package:recipe/core/routing/routing_animation.dart';
 import 'package:recipe/features/auth/presentation/bloc/sign_in_with_google_and_facebook/sign_in_with_google_and_facebook_cubit.dart';
 import 'package:recipe/features/auth/presentation/screens/login_screen.dart';
 import 'package:recipe/features/auth/presentation/screens/registration_screen.dart';
+import 'package:recipe/features/favorites/presentation/bloc/favorites_cubit.dart';
 import 'package:recipe/features/favorites/presentation/screens/favorites_screen.dart';
 import 'package:recipe/features/home/presentation/screens/home_screen.dart';
 import 'package:recipe/features/main/presentation/screens/main_screen.dart';
@@ -48,11 +49,16 @@ class AppRoutes {
           ),
         );
       case main:
-        return AnimationRouting(page: MainScreen());
+        return AnimationRouting(
+          page: BlocProvider(
+            create: (context) => sl<FavoritesCubit>(),
+            child: const MainScreen(),
+          ),
+        );
       case home:
         return AnimationRouting(page: HomeScreen());
       case meals:
-      final args = settings.arguments as Map<String, String>;
+        final args = settings.arguments as Map<String, String>;
         return AnimationRouting(
           page: BlocProvider(
             create: (context) => sl<MealsCubit>()
@@ -65,10 +71,13 @@ class AppRoutes {
         );
       case mealDetails:
         return AnimationRouting(
-          page: BlocProvider(
-            create: (context) =>
-                sl<MealDetailsCubit>()..getMealDetail(arguments.toString()),
-            child: MealDetailsScreen(),
+          page: BlocProvider.value(
+            value: sl<FavoritesCubit>(),
+            child: BlocProvider(
+              create: (context) =>
+                  sl<MealDetailsCubit>()..getMealDetail(arguments.toString()),
+              child: MealDetailsScreen(),
+            ),
           ),
         );
       case favorites:
