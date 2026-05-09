@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:recipe/core/common/widgets/app_list_fallback_widget.dart';
+import 'package:recipe/core/extension/context_extension.dart';
+import 'package:recipe/core/languages/lang_keys.dart';
 import 'package:recipe/features/favorites/presentation/bloc/favorites_cubit.dart';
 import 'package:recipe/features/favorites/presentation/widgets/favorites_grid.dart';
 import 'package:recipe/features/favorites/presentation/widgets/favorites_shimmer.dart';
@@ -26,7 +28,7 @@ class _FavoritesBodyState extends State<FavoritesBody> {
       appBar: AppBar(
         automaticallyImplyLeading: false,
         title: Text(
-          'My Favorites',
+          context.transl(LangKeys.myFavorites),
           style: TextStyle(fontSize: 25.sp, fontWeight: FontWeight.bold),
         ),
       ),

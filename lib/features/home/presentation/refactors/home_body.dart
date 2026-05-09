@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:recipe/core/extension/context_extension.dart';
+import 'package:recipe/core/languages/lang_keys.dart';
 import 'package:recipe/core/style/icons/app_icons.dart';
 import 'package:recipe/features/home/presentation/widgets/home_categories_title_and_seel_all.dart';
 import 'package:recipe/features/home/presentation/widgets/home_grid_view.dart';
@@ -14,11 +16,13 @@ class HomeBody extends StatelessWidget {
       appBar: AppBar(
         scrolledUnderElevation: 0,
         leading: Align(
-          alignment: Alignment.centerLeft,
+          alignment: context.isArabic
+              ? Alignment.centerRight
+              : Alignment.centerLeft,
           child: Padding(
             padding: EdgeInsets.symmetric(horizontal: 10.w),
             child: Text(
-              'Recipe Finder',
+              context.transl(LangKeys.appName),
               style: TextStyle(fontSize: 25.sp, fontWeight: FontWeight.bold),
             ),
           ),
@@ -26,7 +30,7 @@ class HomeBody extends StatelessWidget {
         leadingWidth: 500.w,
         automaticallyImplyLeading: false,
         actions: [Image.asset(AppIcons.signIn, scale: 0.9)],
-        actionsPadding: EdgeInsets.only(right: 10.w),
+        actionsPadding: EdgeInsets.only(right: 10.w, left: 10.w),
       ),
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 0.h),

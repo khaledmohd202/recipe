@@ -110,7 +110,7 @@ class _TitleText extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Text(
-      meal.name,
+      context.localization.translateMeal(meal.name),
       style: TextStyle(fontSize: 22.sp, fontWeight: FontWeight.bold),
     );
   }

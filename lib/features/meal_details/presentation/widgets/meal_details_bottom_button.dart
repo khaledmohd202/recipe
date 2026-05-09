@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:recipe/core/extension/context_extension.dart';
+import 'package:recipe/core/languages/lang_keys.dart';
 import 'package:recipe/core/style/colors/app_colors.dart';
 import 'package:recipe/features/favorites/presentation/bloc/favorites_cubit.dart';
 import 'package:recipe/features/meal_details/data/models/meal_detail_model.dart';
@@ -50,7 +51,9 @@ class MealDetailsBottomButton extends StatelessWidget {
                 color: context.colorScheme.surface,
               ),
               label: Text(
-                isFav ? 'Remove from Favorites' : 'Add to Favorites',
+                isFav
+                    ? context.transl(LangKeys.removeFromFavorites)
+                    : context.transl(LangKeys.addToFavorites),
                 style: TextStyle(
                   fontSize: 18.sp,
                   fontWeight: FontWeight.bold,

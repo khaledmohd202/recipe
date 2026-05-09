@@ -38,4 +38,31 @@ abstract class LangKeys {
   static const String confirm = 'confirm';
   static const String logOut = 'log_out';
   static const String logOutConfirm = 'log_out_confirm';
+
+
+  static const String categoriesTitle = 'categories_title';
+  static const String seeAll = 'see_all';
+  static const String searchHint = 'search_hint';
+  static const String textIconHome = 'home';
+  static const String textIconFavorites = 'favorites';
+  static const String textIconProfile = 'profile';
+  static const String myFavorites = 'my_favorites';
+
+
+  static const String profile = 'profile';
+  static const String account = 'account';
+  static const String editProfile = 'edit_profile';
+  static const String changePassword = 'change_password';
+  static const String notificationSettings = 'notification_settings';
+  static const String preferences = 'preferences';
+  static const String support = 'support';
+  static const String helpCenter = 'help_center';
+  static const String privacyPolicy = 'privacy_policy';
+  static const String termsOfService = 'terms_of_service';
+
+
+  static const String ingredients = 'ingredients';
+  static const String instructions = 'instructions';
+  static const String addToFavorites = 'add_to_favorites';
+  static const String removeFromFavorites = 'remove_from_favorites';
 }

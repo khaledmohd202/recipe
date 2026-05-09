@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:recipe/core/extension/context_extension.dart';
+import 'package:recipe/core/languages/lang_keys.dart';
 import 'package:recipe/core/style/colors/app_colors.dart';
 import 'package:recipe/features/meal_details/data/models/ingredient_model.dart';
 import 'package:recipe/features/meal_details/data/models/meal_detail_model.dart';
@@ -14,7 +16,7 @@ class MealDetailsIngredients extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          'Ingredients',
+          context.transl(LangKeys.ingredients),
           style: TextStyle(fontSize: 18.sp, fontWeight: FontWeight.bold),
         ),
         SizedBox(height: 12.h),

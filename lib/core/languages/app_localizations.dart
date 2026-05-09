@@ -15,31 +15,26 @@ class AppLocalizations {
   static const LocalizationsDelegate<AppLocalizations> delegate =
       AppLocalizationsDelegate();
 
-  late Map<String, String> _localizedStrings;
+  late Map<String, dynamic> _localizedStrings;
 
   Future<void> load() async {
     final jsonString = await rootBundle.loadString(
       'lang/${locale.languageCode}.json',
     );
-    final jsonMap = json.decode(jsonString) as Map<String, dynamic>;
-    _localizedStrings = jsonMap.map<String, String>((key, value) {
-      return MapEntry(key, value.toString());
-    });
+    _localizedStrings = json.decode(jsonString) as Map<String, dynamic>;
   }
 
-  String translate(String key) => _localizedStrings[key] ?? key;
-
-  bool get isArabic => locale.languageCode == 'ar';
+  String translate(String key) => _localizedStrings[key]?.toString() ?? key;
 
   String translateCategory(String categoryName) {
     final categories = _localizedStrings['categories'] as Map?;
-    if (categories == null) return categoryName;
-    return categories[categoryName] ?? categoryName;
+    return categories?[categoryName]?.toString() ?? categoryName;
   }
 
   String translateMeal(String mealName) {
     final meals = _localizedStrings['meals'] as Map?;
-    if (meals == null) return mealName;
-    return meals[mealName] ?? mealName;
+    return meals?[mealName]?.toString() ?? mealName;
   }
+
+  bool get isArabic => locale.languageCode == 'ar';
 }

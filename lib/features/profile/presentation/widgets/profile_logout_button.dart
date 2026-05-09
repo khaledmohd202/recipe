@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:recipe/core/extension/context_extension.dart';
+import 'package:recipe/core/languages/lang_keys.dart';
 import 'package:recipe/core/style/colors/app_colors.dart';
 
 class ProfileLogoutButton extends StatelessWidget {
@@ -18,7 +20,7 @@ class ProfileLogoutButton extends StatelessWidget {
         onPressed: onTap,
         icon: Icon(Icons.logout, color: AppColors.primaryLight),
         label: Text(
-          'Logout',
+          context.transl(LangKeys.logOut),
           style: TextStyle(
             color: AppColors.primaryLight,
             fontSize: 15.sp,

@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:recipe/core/extension/context_extension.dart';
+import 'package:recipe/core/languages/lang_keys.dart';
 import 'package:recipe/features/favorites/presentation/screens/favorites_screen.dart';
-import 'package:recipe/features/home/presentation/bloc/home_cubit.dart';
 import 'package:recipe/features/home/presentation/screens/home_screen.dart';
 import 'package:recipe/features/main/presentation/widgets/bottom_nav_item.dart';
 import 'package:recipe/features/profile/presentation/screens/profile_screen.dart';
@@ -53,7 +52,8 @@ class _MainScreenState extends State<MainScreen> {
                 currentIndex: _currentIndex,
                 icon: Icons.home_outlined,
                 index: 0,
-                label: 'HOME',
+                label: context.transl(LangKeys.textIconHome),
+                // label: 'HOME',
                 onTap: () {
                   setState(() {
                     _currentIndex = 0;
@@ -65,7 +65,7 @@ class _MainScreenState extends State<MainScreen> {
                 currentIndex: _currentIndex,
                 icon: Icons.favorite_outline,
                 index: 1,
-                label: 'FAVORITES',
+                label: context.transl(LangKeys.textIconFavorites),
                 onTap: () {
                   setState(() {
                     _currentIndex = 1;
@@ -77,7 +77,7 @@ class _MainScreenState extends State<MainScreen> {
                 currentIndex: _currentIndex,
                 icon: Icons.person_2_outlined,
                 index: 2,
-                label: 'PROFILE',
+                label: context.transl(LangKeys.textIconProfile),
                 onTap: () {
                   setState(() {
                     _currentIndex = 2;

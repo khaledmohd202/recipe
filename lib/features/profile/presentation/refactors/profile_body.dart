@@ -6,6 +6,7 @@ import 'package:recipe/core/app/theme_cubit/theme_cubit.dart';
 import 'package:recipe/core/common/widgets/app_dialog.dart';
 import 'package:recipe/core/di/injection_container.dart';
 import 'package:recipe/core/extension/context_extension.dart';
+import 'package:recipe/core/languages/lang_keys.dart';
 import 'package:recipe/core/routing/app_routes.dart';
 import 'package:recipe/core/style/colors/app_colors.dart';
 import 'package:recipe/features/auth/presentation/bloc/auth_cubit.dart';
@@ -56,7 +57,7 @@ class _ProfileView extends StatelessWidget {
         scrolledUnderElevation: 0,
         automaticallyImplyLeading: false,
         title: Text(
-          'Profile',
+          context.transl(LangKeys.profile),
           style: TextStyle(
             fontSize: 24.sp,
             fontWeight: FontWeight.bold,
@@ -73,44 +74,45 @@ class _ProfileView extends StatelessWidget {
             const ProfileAvatar(),
             SizedBox(height: 12.h),
             Text(
-              'Khaled Mohammad',
+              context.transl(LangKeys.account),
               style: TextStyle(fontSize: 18.sp, fontWeight: FontWeight.bold),
             ),
             SizedBox(height: 4.h),
             Text(
               'khaledmohd202@gmail.com',
+              // context.transl(LangKeys.email),
               style: TextStyle(fontSize: 13.sp, color: Colors.grey),
             ),
             SizedBox(height: 30.h),
 
             // ACCOUNT
-            const ProfileSectionTitle(title: 'ACCOUNT'),
+            ProfileSectionTitle(title: context.transl(LangKeys.account)),
             SizedBox(height: 8.h),
             ProfileTile(
               icon: Icons.person_outline,
-              label: 'Edit Profile',
+              label: context.transl(LangKeys.editProfile),
               onTap: () {},
             ),
             ProfileTile(
               icon: Icons.lock_outline,
-              label: 'Change Password',
+              label: context.transl(LangKeys.changePassword),
               onTap: () {},
             ),
             ProfileTile(
               icon: Icons.notifications_outlined,
-              label: 'Notification Settings',
+              label: context.transl(LangKeys.notificationSettings),
               onTap: () {},
             ),
             SizedBox(height: 20.h),
 
             // PREFERENCES
-            const ProfileSectionTitle(title: 'PREFERENCES'),
+            ProfileSectionTitle(title: context.transl(LangKeys.preferences)),
             SizedBox(height: 8.h),
             BlocBuilder<ThemeCubit, ThemeMode>(
               builder: (context, themeState) {
                 return ProfileTile(
                   icon: Icons.dark_mode_outlined,
-                  label: 'Dark Mode',
+                  label: context.transl(LangKeys.darkMode),
                   onTap: cubit.toggleTheme,
                   trailing: Switch(
                     value: cubit.isDark,
@@ -124,7 +126,7 @@ class _ProfileView extends StatelessWidget {
               builder: (context, localeState) {
                 return ProfileTile(
                   icon: Icons.language_outlined,
-                  label: 'Language',
+                  label: context.transl(LangKeys.language),
                   onTap: cubit.toggleLanguage,
                   trailing: Row(
                     mainAxisSize: MainAxisSize.min,
@@ -150,21 +152,21 @@ class _ProfileView extends StatelessWidget {
             SizedBox(height: 20.h),
 
             // SUPPORT
-            const ProfileSectionTitle(title: 'SUPPORT'),
+            ProfileSectionTitle(title: context.transl(LangKeys.support)),
             SizedBox(height: 8.h),
             ProfileTile(
               icon: Icons.help_outline,
-              label: 'Help Center',
+              label: context.transl(LangKeys.helpCenter),
               onTap: () {},
             ),
             ProfileTile(
               icon: Icons.shield_outlined,
-              label: 'Privacy Policy',
+              label: context.transl(LangKeys.privacyPolicy),
               onTap: () {},
             ),
             ProfileTile(
               icon: Icons.description_outlined,
-              label: 'Terms of Service',
+              label: context.transl(LangKeys.termsOfService),
               onTap: () {},
             ),
             SizedBox(height: 24.h),
@@ -173,10 +175,10 @@ class _ProfileView extends StatelessWidget {
               onTap: () async {
                 final confirmed = await AppDialog.confirm(
                   context,
-                  title: 'Logout',
-                  message: 'Are you sure you want to logout?',
-                  confirmText: 'Logout',
-                  cancelText: 'Cancel',
+                  title: context.transl(LangKeys.logOut),
+                  message: context.transl(LangKeys.logOutConfirm),
+                  confirmText: context.transl(LangKeys.logOut),
+                  cancelText: context.transl(LangKeys.cancel),
                   isDestructive: true,
                 );
                 if (confirmed == true && context.mounted) {

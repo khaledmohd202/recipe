@@ -40,8 +40,9 @@ extension ContextExtension on BuildContext {
   MyColors get appColors => Theme.of(this).extension<MyColors>()!;
 
   // Localization Extensions.
-  String transl(String key) => AppLocalizations.of(this)!.translate(key);
-  bool get isArabic => AppLocalizations.of(this)!.isArabic;
+  AppLocalizations get localization => AppLocalizations.of(this)!;
+  String transl(String key) => localization.translate(key);
+  bool get isArabic => localization.isArabic;
 
   // Screen Size Extensions.
   double get screenWidth => MediaQuery.sizeOf(this).width;

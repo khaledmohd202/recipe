@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:recipe/core/extension/context_extension.dart';
+import 'package:recipe/core/languages/lang_keys.dart';
 
 class HomeSearchBar extends StatelessWidget {
   const HomeSearchBar({
@@ -33,14 +35,18 @@ class HomeSearchBar extends StatelessWidget {
             ),
             child: Row(
               children: [
-                Icon(Icons.search, color: Colors.grey),
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 10.w),
+                  child: Icon(Icons.search, color: Colors.grey),
+                ),
                 SizedBox(width: 10.w),
                 Expanded(
                   child: TextField(
                     controller: controller,
                     textAlignVertical: TextAlignVertical.center,
                     decoration: InputDecoration(
-                      hintText: 'Search recipes, ingredients...',
+                      // hintText: 'Search recipes, ingredients...',
+                      hintText: context.transl(LangKeys.searchHint),
                       hintStyle: TextStyle(
                         fontSize: 14.sp,
                         color: Colors.grey[500],

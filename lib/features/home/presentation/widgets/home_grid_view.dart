@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:recipe/core/app/localization/localization_cubit.dart';
 import 'package:recipe/core/common/widgets/app_image.dart';
 import 'package:recipe/core/common/widgets/app_list_fallback_widget.dart';
 import 'package:recipe/core/common/widgets/app_shimmer.dart';
@@ -40,61 +41,69 @@ class HomeGridView extends StatelessWidget {
         }
         if (state is HomeSuccess) {
           return Expanded(
-            child: GridView.builder(
-              shrinkWrap: true,
-              padding: EdgeInsets.symmetric(vertical: 20.h),
-              itemCount: 6,
-              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 2,
-                mainAxisSpacing: 15.w,
-                crossAxisSpacing: 15.h,
-                childAspectRatio: 0.8,
-                // mainAxisExtent: 100.h,
-              ),
-              itemBuilder: (context, index) {
-                final category = state.categories[index];
-                return GestureDetector(
-                  onTap: () {
-                    context.pushNamed(
-                      AppRoutes.meals,
-                      arguments: {
-                        'categoryId': category.id.toString(),
-                        'categoryName': category.name,
+            child: BlocBuilder<LocalizationCubit, Locale>(
+              builder: (context, locale) {
+                return GridView.builder(
+                  shrinkWrap: true,
+                  padding: EdgeInsets.symmetric(vertical: 20.h),
+                  itemCount: 6,
+                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 2,
+                    mainAxisSpacing: 15.w,
+                    crossAxisSpacing: 15.h,
+                    childAspectRatio: 0.8,
+                    // mainAxisExtent: 100.h,
+                  ),
+                  itemBuilder: (context, index) {
+                    final category = state.categories[index];
+                    return GestureDetector(
+                      onTap: () {
+                        context.pushNamed(
+                          AppRoutes.meals,
+                          arguments: {
+                            'categoryId': category.id.toString(),
+                            'categoryName': category.name,
+                          },
+                        );
                       },
+                      child: Container(
+                        width: 155.w,
+                        height: 180.h,
+                        decoration: BoxDecoration(
+                          color: Colors.amber,
+                          borderRadius: BorderRadius.circular(24.r),
+                        ),
+                        child: Stack(
+                          children: [
+                            AppImage(
+                              imageUrl: category.imageUrl,
+                              fit: BoxFit.fill,
+                              height: double.infinity,
+                              width: double.infinity,
+                              borderRadius: BorderRadius.circular(15.r),
+                              // errorWidget: ,
+                            ),
+                            Positioned(
+                              bottom: 10.h,
+                              left: 10.w,
+                              child: Text(
+                                context.localization
+                                    .translateCategory(category.name)
+                                    .toUpperCase(),
+                                style: TextStyle(
+                                  color: context.colorScheme.surface,
+                                  // color: AppColors.darkBackground,
+                                  // color: Colors.indigo,
+                                  fontSize: 18.sp,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
                     );
                   },
-                  child: Container(
-                    width: 155.w,
-                    height: 180.h,
-                    decoration: BoxDecoration(
-                      color: Colors.amber,
-                      borderRadius: BorderRadius.circular(24.r),
-                    ),
-                    child: Stack(
-                      children: [
-                        AppImage(
-                          imageUrl: category.imageUrl,
-                          fit: BoxFit.fill,
-                          height: double.infinity,
-                          width: double.infinity,
-                          borderRadius: BorderRadius.circular(15.r),
-                          // errorWidget: ,
-                        ),
-                        Positioned(
-                          bottom: 10.h,
-                          left: 10.w,
-                          child: Text(
-                            category.name.toUpperCase(),
-                            style: TextStyle(
-                              color: context.colorScheme.surface,
-                              fontSize: 16.sp,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
                 );
               },
             ),

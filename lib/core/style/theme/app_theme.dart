@@ -11,6 +11,7 @@ ThemeData lightTheme() {
     colorScheme: ColorScheme.fromSeed(
       seedColor: AppColors.primary,
       brightness: Brightness.light,
+      surface: Color(0xFFFFFFFF),
     ),
     textTheme: const TextTheme(
       displaySmall: TextStyle(

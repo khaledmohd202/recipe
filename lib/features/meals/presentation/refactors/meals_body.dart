@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:recipe/core/common/widgets/app_list_fallback_widget.dart';
+import 'package:recipe/core/extension/context_extension.dart';
 import 'package:recipe/core/style/colors/app_colors.dart';
 import 'package:recipe/features/meals/presentation/bloc/meals_cubit.dart';
 import 'package:recipe/features/meals/presentation/widgets/meals_grid.dart';
@@ -53,7 +54,7 @@ class _MealsBodyState extends State<MealsBody> {
           child: BackButton(color: AppColors.primaryLight),
         ),
         title: Text(
-          categoryName.toUpperCase(),
+          context.localization.translateCategory(categoryName).toUpperCase(),
           style: TextStyle(fontSize: 24.sp, fontWeight: FontWeight.bold),
         ),
       ),
@@ -77,5 +78,3 @@ class _MealsBodyState extends State<MealsBody> {
     );
   }
 }
-
-
