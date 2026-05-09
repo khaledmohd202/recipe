@@ -37,7 +37,7 @@ Recipe Finder is a modern recipe discovery app that lets you browse meals by cat
   <td align="center"><img width="180" src="assets/App_screens/splash.png"/><br/>Splash</td>
   <td align="center"><img width="180" src="assets/App_screens/sign_in.png"/><br/>Sign In</td>
   <td align="center"><img width="180" src="assets/App_screens/sign_up.png"/><br/>Sign Up</td>
-  <td align="center"><img width="180" src="assets/App_screens/home.png"/><br/>Home</td>
+  <td align="center"><img width="180" src="assets/App_screens/Home.png"/><br/>Home</td>
 </tr>
 <tr>
   <td align="center"><img width="180" src="assets/App_screens/meals_by_category.png"/><br/>Meals by Category</td>
