@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:recipe/core/extension/context_extension.dart';
 
 /// A fully customizable app-wide TextFormField.
 ///
@@ -146,8 +147,8 @@ class _AppTextFieldState extends State<AppTextField> {
           Text(
             widget.label!,
             style: theme.textTheme.labelLarge?.copyWith(
-              // color: colorScheme.onSurface,
-              color: Colors.black45,
+              color: context.colorScheme.onSurface,
+              // color: Colors.black45,
               fontWeight: FontWeight.w500,
             ),
           ),

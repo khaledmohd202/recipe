@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:recipe/core/extension/context_extension.dart';
 import 'package:recipe/core/style/colors/app_colors.dart';
 import 'package:recipe/features/favorites/presentation/bloc/favorites_cubit.dart';
 import 'package:recipe/features/meal_details/data/models/meal_detail_model.dart';
@@ -16,7 +17,6 @@ class MealDetailsBottomButton extends StatelessWidget {
         final cubit = context.read<FavoritesCubit>();
         final isFav = cubit.isFavorite(meal.id);
 
-
         return Positioned(
           bottom: 0,
           left: 0,
@@ -24,7 +24,7 @@ class MealDetailsBottomButton extends StatelessWidget {
           child: Container(
             padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 12.h),
             decoration: BoxDecoration(
-              color: Colors.white,
+              color: context.colorScheme.surface,
               boxShadow: [
                 BoxShadow(
                   color: AppColors.primaryLight.withValues(alpha: 0.15),
@@ -45,10 +45,17 @@ class MealDetailsBottomButton extends StatelessWidget {
                   borderRadius: BorderRadius.circular(30.r),
                 ),
               ),
-              icon: Icon(isFav ? Icons.bookmark : Icons.bookmark_border),
+              icon: Icon(
+                isFav ? Icons.bookmark : Icons.bookmark_border,
+                color: context.colorScheme.surface,
+              ),
               label: Text(
                 isFav ? 'Remove from Favorites' : 'Add to Favorites',
-                style: TextStyle(fontSize: 16.sp, fontWeight: FontWeight.w600),
+                style: TextStyle(
+                  fontSize: 18.sp,
+                  fontWeight: FontWeight.bold,
+                  color: context.colorScheme.surface,
+                ),
               ),
             ),
           ),

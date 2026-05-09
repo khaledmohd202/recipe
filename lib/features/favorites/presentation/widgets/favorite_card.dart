@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:recipe/core/common/widgets/app_image.dart';
+import 'package:recipe/core/extension/context_extension.dart';
 import 'package:recipe/features/favorites/data/models/favorites_model.dart';
 import 'package:recipe/features/favorites/presentation/bloc/favorites_cubit.dart';
 
@@ -19,12 +20,12 @@ class FavoriteCard extends StatelessWidget {
       child: Container(
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(24.r),
-          color: Colors.white,
+          color: context.colorScheme.surface,
           boxShadow: [
             BoxShadow(
-              color: Colors.grey.withValues(alpha: 0.2),
+              color: Colors.grey.withValues(alpha: 0.1),
               spreadRadius: 2,
-              blurRadius: 8,
+              blurRadius: 20,
               offset: const Offset(0, 4),
             ),
           ],

@@ -57,7 +57,7 @@ Future<void> _initHome() async {
   sl
     ..registerLazySingleton<HomeDataSource>(() => HomeDataSource(sl()))
     ..registerLazySingleton<HomeRepo>(() => HomeRepo(sl()))
-    ..registerFactory<HomeCubit>(() => HomeCubit(sl()));
+    ..registerLazySingleton<HomeCubit>(() => HomeCubit(sl()));
 }
 
 Future<void> _initMeals() async {

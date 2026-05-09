@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:recipe/core/extension/context_extension.dart';
 import 'package:recipe/core/style/colors/app_colors.dart';
 import 'package:recipe/features/meal_details/data/models/meal_detail_model.dart';
 
@@ -19,8 +20,8 @@ class MealDetailsTags extends StatelessWidget {
         SizedBox(width: 8.w),
         _Tag(
           label: meal.mealSection.toUpperCase(),
-          backgroundColor: Colors.grey.shade200,
-          textColor: Colors.black54,
+          backgroundColor: context.colorScheme.surface,
+          textColor: context.colorScheme.onSurface,
         ),
       ],
     );

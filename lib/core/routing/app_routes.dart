@@ -7,6 +7,7 @@ import 'package:recipe/features/auth/presentation/screens/login_screen.dart';
 import 'package:recipe/features/auth/presentation/screens/registration_screen.dart';
 import 'package:recipe/features/favorites/presentation/bloc/favorites_cubit.dart';
 import 'package:recipe/features/favorites/presentation/screens/favorites_screen.dart';
+import 'package:recipe/features/home/presentation/bloc/home_cubit.dart';
 import 'package:recipe/features/home/presentation/screens/home_screen.dart';
 import 'package:recipe/features/main/presentation/screens/main_screen.dart';
 import 'package:recipe/features/meal_details/presentation/bloc/meal_details_cubit.dart';
@@ -50,8 +51,11 @@ class AppRoutes {
         );
       case main:
         return AnimationRouting(
-          page: BlocProvider(
-            create: (context) => sl<FavoritesCubit>(),
+          page: MultiBlocProvider(
+            providers: [
+              BlocProvider.value(value: sl<HomeCubit>()..getCategories()),
+              BlocProvider.value(value: sl<FavoritesCubit>()),
+            ],
             child: const MainScreen(),
           ),
         );

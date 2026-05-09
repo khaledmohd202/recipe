@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:recipe/core/extension/context_extension.dart';
 import 'package:recipe/features/favorites/presentation/bloc/favorites_cubit.dart';
 import 'package:recipe/features/meal_details/data/models/meal_detail_model.dart';
 import 'package:recipe/features/meal_details/presentation/bloc/meal_details_cubit.dart';
@@ -64,7 +65,7 @@ class _MealDetailsBodyState extends State<MealDetailsBody> {
                         offset: Offset(0, -20.h),
                         child: Container(
                           decoration: BoxDecoration(
-                            color: Colors.white,
+                            color: context.colorScheme.surface,
                             borderRadius: BorderRadius.vertical(
                               top: Radius.circular(24.r),
                             ),

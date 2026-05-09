@@ -7,6 +7,7 @@ class ProfileCubit extends Cubit<void> {
 
   final ThemeCubit themeCubit;
   final LocalizationCubit localizationCubit;
+  
 
   void toggleTheme() => themeCubit.toggleTheme();
   void toggleLanguage() => localizationCubit.toggleLanguage();

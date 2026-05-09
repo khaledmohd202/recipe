@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:recipe/core/extension/context_extension.dart';
 import 'package:recipe/core/style/colors/app_colors.dart';
 
 class ProfileTile extends StatelessWidget {
@@ -21,7 +22,7 @@ class ProfileTile extends StatelessWidget {
     return Container(
       margin: EdgeInsets.only(bottom: 8.h),
       decoration: BoxDecoration(
-        color: Colors.grey.shade50,
+        color: context.colorScheme.surface,
         borderRadius: BorderRadius.circular(12.r),
       ),
       child: ListTile(

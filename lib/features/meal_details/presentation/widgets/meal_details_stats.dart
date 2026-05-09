@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:recipe/core/extension/context_extension.dart';
 import 'package:recipe/core/style/colors/app_colors.dart';
 import 'package:recipe/features/meal_details/data/models/meal_detail_model.dart';
 
@@ -13,7 +14,7 @@ class MealDetailsStats extends StatelessWidget {
       padding: EdgeInsets.symmetric(vertical: 12.h),
       decoration: BoxDecoration(
         border: Border.symmetric(
-          horizontal: BorderSide(color: Colors.grey.shade200),
+          horizontal: BorderSide(color: context.colorScheme.outlineVariant),
         ),
       ),
       child: Row(
@@ -56,6 +57,10 @@ class _StatItem extends StatelessWidget {
 class _Divider extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Container(width: 1.w, height: 30.h, color: Colors.grey.shade300);
+    return Container(
+      width: 1.w,
+      height: 30.h,
+      color: context.colorScheme.outlineVariant,
+    );
   }
 }

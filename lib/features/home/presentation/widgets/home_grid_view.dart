@@ -86,7 +86,7 @@ class HomeGridView extends StatelessWidget {
                           child: Text(
                             category.name.toUpperCase(),
                             style: TextStyle(
-                              color: Colors.white,
+                              color: context.colorScheme.surface,
                               fontSize: 16.sp,
                               fontWeight: FontWeight.bold,
                             ),
