@@ -32,47 +32,29 @@ Recipe Finder is a modern recipe discovery app that lets you browse meals by cat
 
 ### Light Mode
 
-<table>
-<tr>
-  <td align="center"><img width="180" src="assets/App_screens/splash.png"/><br/>Splash</td>
-  <td align="center"><img width="180" src="assets/App_screens/Sign_in.png"/><br/>Sign In</td>
-  <td align="center"><img width="180" src="assets/App_screens/Sign_up.png"/><br/>Sign Up</td>
-  <td align="center"><img width="180" src="assets/App_screens/Home.png"/><br/>Home</td>
-</tr>
-<tr>
-  <td align="center"><img width="180" src="assets/App_screens/Meals_by_Category.png"/><br/>Meals by Category</td>
-  <td align="center"><img width="180" src="assets/App_screens/Meal_Detail.png"/><br/>Meal Details</td>
-  <td align="center"><img width="180" src="assets/App_screens/favourites.png"/><br/>Favorites</td>
-  <td align="center"><img width="180" src="assets/App_screens/profile.png"/><br/>Profile</td>
-</tr>
-</table>
+| Splash | Sign In | Sign Up | Home |
+|--------|---------|---------|------|
+| <img width="180" src="https://raw.githubusercontent.com/khaledmohd202/recipe/dev/assets/App_screens/splash.png"/> | <img width="180" src="https://raw.githubusercontent.com/khaledmohd202/recipe/dev/assets/App_screens/Sign%20in.png"/> | <img width="180" src="https://raw.githubusercontent.com/khaledmohd202/recipe/dev/assets/App_screens/Sign%20up.png"/> | <img width="180" src="https://raw.githubusercontent.com/khaledmohd202/recipe/dev/assets/App_screens/Home.png"/> |
+
+| Meals by Category | Meal Details | Favorites | Profile |
+|-------------------|--------------|-----------|---------|
+| <img width="180" src="https://raw.githubusercontent.com/khaledmohd202/recipe/dev/assets/App_screens/Meals%20by%20Category.png"/> | <img width="180" src="https://raw.githubusercontent.com/khaledmohd202/recipe/dev/assets/App_screens/Meal%20Detail.png"/> | <img width="180" src="https://raw.githubusercontent.com/khaledmohd202/recipe/dev/assets/App_screens/favourites.png"/> | <img width="180" src="https://raw.githubusercontent.com/khaledmohd202/recipe/dev/assets/App_screens/profile.png"/> |
 
 ### Dark Mode
 
-<table>
-<tr>
-  <td align="center"><img width="180" src="assets/App_screens/sign_in_with_dark_mode.jpeg"/><br/>Sign In — Dark</td>
-  <td align="center"><img width="180" src="assets/App_screens/meals_with_dark_mode.jpeg"/><br/>Meals — Dark</td>
-  <td align="center"><img width="180" src="assets/App_screens/meal_details_with_dark_mode.jpeg"/><br/>Meal Details — Dark</td>
-  <td align="center"><img width="180" src="assets/App_screens/favorites_with_light_mode.jpeg"/><br/>Favorites — Light</td>
-</tr>
-</table>
+| Sign In | Meals | Meal Details | Favorites |
+|---------|-------|--------------|-----------|
+| <img width="180" src="https://raw.githubusercontent.com/khaledmohd202/recipe/dev/assets/App_screens/sign_in_with_dark_mode.jpeg"/> | <img width="180" src="https://raw.githubusercontent.com/khaledmohd202/recipe/dev/assets/App_screens/meals_with_dark_mode.jpeg"/> | <img width="180" src="https://raw.githubusercontent.com/khaledmohd202/recipe/dev/assets/App_screens/meal_details_with_dark_mode.jpeg"/> | <img width="180" src="https://raw.githubusercontent.com/khaledmohd202/recipe/dev/assets/App_screens/favorites_with_light_mode.jpeg"/> |
 
-### Arabic (RTL) Support
+### Arabic RTL Support
 
-<table>
-<tr>
-  <td align="center"><img width="180" src="assets/App_screens/sign_in_with_light_mode_and_ar.jpeg"/><br/>Sign In — AR</td>
-  <td align="center"><img width="180" src="assets/App_screens/sign_in_with_dark_mode_and_ar.jpeg"/><br/>Sign In — AR Dark</td>
-  <td align="center"><img width="180" src="assets/App_screens/home_with_ar.jpeg"/><br/>Home — AR</td>
-  <td align="center"><img width="180" src="assets/App_screens/home_with_dark_mode_and_ar.jpeg"/><br/>Home — AR Dark</td>
-</tr>
-<tr>
-  <td align="center"><img width="180" src="assets/App_screens/profile_with_ar.jpeg"/><br/>Profile — AR</td>
-  <td align="center"><img width="180" src="assets/App_screens/profile_with_dark_mode_and_ar.jpeg"/><br/>Profile — AR Dark</td>
-  <td align="center"><img width="180" src="assets/App_screens/signing_in_with_google.jpeg"/><br/>Google Sign In</td>
-</tr>
-</table>
+| Sign In AR | Sign In AR Dark | Home AR | Home AR Dark |
+|------------|-----------------|---------|--------------|
+| <img width="180" src="https://raw.githubusercontent.com/khaledmohd202/recipe/dev/assets/App_screens/sign_in_with_light_mode_and_ar.jpeg"/> | <img width="180" src="https://raw.githubusercontent.com/khaledmohd202/recipe/dev/assets/App_screens/sign_in_with_dark_mode_and_ar.jpeg"/> | <img width="180" src="https://raw.githubusercontent.com/khaledmohd202/recipe/dev/assets/App_screens/home_with_ar.jpeg"/> | <img width="180" src="https://raw.githubusercontent.com/khaledmohd202/recipe/dev/assets/App_screens/home_with_dark_mode_and_ar.jpeg"/> |
+
+| Profile AR | Profile AR Dark | Google Sign In |
+|------------|-----------------|----------------|
+| <img width="180" src="https://raw.githubusercontent.com/khaledmohd202/recipe/dev/assets/App_screens/profile_with_ar.jpeg"/> | <img width="180" src="https://raw.githubusercontent.com/khaledmohd202/recipe/dev/assets/App_screens/profile_with_dark_mode_and_ar.jpeg"/> | <img width="180" src="https://raw.githubusercontent.com/khaledmohd202/recipe/dev/assets/App_screens/signing_in_with_google.jpeg"/> |
 
 ---
 
@@ -121,7 +103,7 @@ lib/
 
 ### 1️⃣ Clone the Repository
 ```bash
-git clone https://github.com/khaledmohd202/recipe_finder.git
+git clone https://github.com/khaledmohd202/recipe.git
 ```
 
 ### 2️⃣ Install Dependencies
